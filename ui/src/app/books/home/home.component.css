@@ -1,0 +1,69 @@
+.container{
+  background-color: white;
+  width: 100%;
+  height: 95%;
+  border-radius: 5px;
+  overflow-y: auto;
+  position: relative;
+  left: 0;
+  top: 0;
+}
+.btn-custom{
+  padding: 0;
+  width: 2.5rem;
+}
+.mat-icon-custom{
+  width: 2rem;
+}
+
+.wrapper-table{
+  width: 100%;
+  height: 78%;
+  position: relative;
+  top: 0;
+  left: 0;
+}
+.mat-table-custom{
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+.table-paginator{
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+::ng-deep  .cdk-overlay-container{
+  position: fixed;
+  top: 0;
+  left: 0;
+  opacity: 1;
+  z-index: 1000;
+}
+
+::ng-deep .cdk-overlay-pane{
+  background-color: white;
+}
+
+@media screen and (max-width: 800px) {
+  ::ng-deep mat-cell{
+    word-break: break-all;
+  }
+}
+
+::ng-deep mat-row, mat-footer-row {
+  min-height: 0px !important;
+  background-color: white !important;
+  margin: 6px 0;
+  border-top-width: 0;
+  border-bottom-width: 0;
+}
+
+::ng-deep mat-table {
+    background-color: #e2e2e2;
+}
+
+

@@ -1,0 +1,57 @@
+<div class="confirm-dialog">
+  <div mat-dialog-title class="wrapper-title">
+    <h2>{{ titleConfirm }}</h2>
+  </div>
+
+  <div mat-dialog-content class="wrapper-content">
+    <p>{{ messageConfirm }}</p>
+
+    <div class="container">
+
+      <h1>Add New Book</h1>
+      <form [formGroup]="bookForm" novalidate (ngSubmit)="save()">
+        <div class="mb-3">
+          <label class="form-label">Author</label>
+          <input type="text" class="form-control" #author formControlName="author" />
+          <div *ngIf="bookForm.get('author')?.invalid && (bookForm.get('author')!.dirty || bookForm.get('author')!.touched)">
+            <div class="alert alert-danger" *ngIf="bookForm.get('author')?.hasError('required')">Name author is required.</div>
+            <div class="alert alert-danger" *ngIf="bookForm.get('author')?.hasError('minlength')">Minimum length is {{bookForm.get('author')?.getError('minlength')?.requiredLength}} characters</div>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Book Name</label>
+          <input type="text" class="form-control" #name formControlName="name" />
+          <div *ngIf="bookForm.get('name')?.invalid && (bookForm.get('name')!.dirty || bookForm.get('name')!.touched)">
+            <div class="alert alert-danger" *ngIf="bookForm.get('name')?.hasError('required')">Name is required.</div>
+            <div class="alert alert-danger" *ngIf="bookForm.get('name')?.hasError('minlength')">Minimum length is {{bookForm.get('name')?.getError('minlength')?.requiredLength}} characters</div>
+          </div>
+
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Cost</label>
+          <input type="number" class="form-control" #cost formControlName="cost" />
+          <div *ngIf="bookForm.get('cost')?.invalid && (bookForm.get('cost')!.dirty || bookForm.get('cost')!.touched)">
+            <div class="alert alert-danger" *ngIf="bookForm.get('cost')?.hasError('required')">Cost is required.</div>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Description</label>
+          <textarea class="form-control" #description formControlName="description"></textarea>
+          <div *ngIf="bookForm.get('description')?.invalid && (bookForm.get('description')!.dirty || bookForm.get('description')!.touched)">
+            <div class="alert alert-danger" *ngIf="bookForm.get('description')?.hasError('required')">Description is required.</div>
+            <div class="alert alert-danger" *ngIf="bookForm.get('description')?.hasError('minlength')">Minimum length is {{bookForm.get('description')?.getError('minlength')?.requiredLength}} characters</div>
+          </div>
+        </div>
+
+        <p class="text-right">
+
+          <a [routerLink]="['/books']" class="btn btn-info mr-3">Home</a>
+          <button type="submit" class="btn btn-dark" [disabled]="bookForm.invalid">Save</button>
+        </p>
+      </form>
+</div>
+  </div>
+</div>

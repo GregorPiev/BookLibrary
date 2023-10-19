@@ -1,0 +1,14 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\src",
+    "\\src\\app",
+    "\\src\\app\\books",
+    "\\src\\app\\books\\add",
+    "\\src\\app\\books\\home",
+    "\\src\\app\\books\\store",
+    "\\src\\app\\shared",
+    "\\src\\app\\shared\\material"
+  ],
+  "PreviewInSolutionExplorer": false
+}

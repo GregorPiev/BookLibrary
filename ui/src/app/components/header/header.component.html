@@ -1,0 +1,9 @@
+<nav class="navbar navbar-expand-lg bg-dark">
+  <div class="container-fluid d-flex justify-content-lg-between align-items-baseline">
+    <a class="navbar-brand" href="#">NavBar</a>
+    <div class="d-flex justify-content-lg-between align-items-baseline">
+      <div class="text-white cursor-pointer mr-5" *ngIf="user" (click)="logout()">Logout</div>
+      <div class="text-white">{{ user }}</div>
+    </div>
+  </div>
+</nav>

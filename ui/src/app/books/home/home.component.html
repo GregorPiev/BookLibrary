@@ -1,0 +1,103 @@
+<div class="container mt-2 min-vh-100">
+  <div class="row">
+    <div class="col col-12 mb-5 text-right">
+      <button (click)="addNewBook()" class="btn btn-dark">New Book</button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="wrapper-table text-left p-2" *ngIf="!!dataSource; else elseBlock">
+      <div class="table-paginator">
+        <mat-paginator MatPaginator [pageSizeOptions]="[8, 16, 32]" showFirstLastButtons></mat-paginator>
+      </div>
+
+      <mat-table class="mat-table-custom" [dataSource]="dataSource" matSort multiTemplateDataRows>
+        <!-- ID Column -->
+        <ng-container matColumnDef="toggle">
+          <mat-header-cell *matHeaderCellDef></mat-header-cell>
+          <mat-cell *matCellDef="let item">
+            <mat-icon>arrow_downward</mat-icon>
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="id">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>ID</mat-header-cell>
+          <mat-cell class="mat-cell-custom" title="{{ item.id }}" *matCellDef="let item">{{ item.id }}</mat-cell>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="name">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Name</mat-header-cell>
+          <mat-cell class="mat-cell-custom" title="{{ item.name }}" *matCellDef="let item">{{ item.name }}</mat-cell>
+        </ng-container>
+
+        <!-- Author Column -->
+        <ng-container matColumnDef="author">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Author</mat-header-cell>
+          <mat-cell class="mat-cell-custom" title="{{ item.author }}" *matCellDef="let item">{{item.author}}</mat-cell>
+        </ng-container>
+
+        <!-- Cost Column -->
+        <ng-container matColumnDef="cost">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Cost</mat-header-cell>
+          <mat-cell class="mat-cell-custom" title="{{ item.cost }}" *matCellDef="let item">{{ item.cost }}</mat-cell>
+        </ng-container>
+
+        <!-- Actions Column -->
+        <ng-container matColumnDef="actions">
+          <mat-header-cell *matHeaderCellDef>Actions</mat-header-cell>
+          <mat-cell *matCellDef="let item">
+            <button class="btn btn-info btn-custom mr-1" mat-icon-button [routerLink]="['edit', item.id]">
+              <mat-icon class="mat-icon-custom">edit</mat-icon>
+            </button>
+            <button class="btn btn-info btn-custom" mat-icon-button (click)="openDeleteModal(item.id)">
+              <mat-icon class="mat-icon-custom">delete</mat-icon>
+            </button>
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="description">          
+          <mat-cell *matCellDef="let item" [attr.colspan]="displayedColumns.length">
+            <div class="example-element-detail"
+                 [ngStyle]="{'display':item == expandedElement ? 'block': 'none'}"
+                 *ngIf="item.description">
+                 {{item.description}}
+            </div>
+          </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;" class="example-element-row"
+                 [class.example-expanded-row]="expandedElement === row"
+                 (click)="expandedElement = row"></mat-row>
+
+        <mat-row *matRowDef="let row; columns: ['description']" class="example-detail-row"></mat-row>
+      </mat-table>
+    </div>
+
+    <ng-template #elseBlock>
+      <div class="m-5">
+        Loading...
+      </div>
+
+    </ng-template>
+  </div>
+</div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Confirm Delete</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="close()" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          Are sure to delete this item?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" (click)="close()" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-danger" (click)="delete()">Confirm Delete</button>
+        </div>
+      </div>
+    </div>
+  </div>
